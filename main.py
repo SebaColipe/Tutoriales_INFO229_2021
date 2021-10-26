@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+#uvicorn main:app --reload
 #o	GET /v1/news?from=2021-01-01&to=2021-01-31&category=sport
 app = FastAPI()
 
