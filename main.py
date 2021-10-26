@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-
+#o	GET /v1/news?from=2021-01-01&to=2021-01-31&category=sport
 app = FastAPI()
 
 fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
