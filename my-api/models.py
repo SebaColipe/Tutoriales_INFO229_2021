@@ -7,19 +7,19 @@ class News(Base):
 
     __tablename__ = "news"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer,unique=True, primary_key=True, index=True)
     title = Column(String(150), unique=True, index=True)
-    date = Column(String(50), unique=True)
+    date = Column(String(50))
     url = Column(String(350), unique=True)
-    media_outlet = Column(String(50), unique=True, index=True)
-    category = Column(String(50))
+    media_outlet = Column(String(50), index=True)
+    category = Column(String(50), primary_key=True)
     
-    categorias = relationship("Has_Category", back_populates="noticias")
+    #categorias = relationship("Has_Category", back_populates="noticias")
 
 class Has_Category(Base):
 
     __tablename__ = "has_category"
-    value = Column(String(50),primary_key=True, index=True)
-    new_id = Column(Integer, ForeignKey("news.id"))
+    nombre_categoria = Column(String(50),primary_key=True, index=True)
+    value = Column(Integer, ForeignKey("news.id"))
 
-    noticias = relationship("News", back_populates="categorias")
+#    noticias = relationship("News", back_populates="categorias")

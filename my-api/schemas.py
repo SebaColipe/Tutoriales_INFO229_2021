@@ -4,13 +4,12 @@ from pydantic import BaseModel
 
 
 class Has_CategoryBase(BaseModel):
-    news_id: int
-
-class Has_CategoryCreate(Has_CategoryBase):
     pass
+class Has_CategoryCreate(Has_CategoryBase):
+    value: int
+    nombre_categoria: str
 
 class Has_Category(Has_CategoryBase):
-    value: str
     
 
     class Config:
@@ -26,7 +25,7 @@ class News(NewsBase):
     id: int
     date: str
     media_outlet: str
-    categorias: List[Has_Category] = []
+    category: str
 
     class Config:
         orm_mode = True

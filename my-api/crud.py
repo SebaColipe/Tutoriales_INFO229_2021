@@ -37,6 +37,6 @@ def create_news_category(db: Session, category: schemas.Has_CategoryCreate, news
     db.commit()
     db.refresh(db_item)
     return db_item
-def get_news_from_date(db: Session, From : str, to: str, category : str):
-    return db.query(models.Has_Category).filter(models.News.date >= From and models.News.date <= to)
-
+def get_news_from_date(db: Session, From : str = "2020-01-01", to: str = "2022-01-01", category : str = "sport"):
+    return db.query(models.News).filter(models.News.date <= to ).filter(models.News.date >= From ).filter(models.News.category == category ).all()
+#.join(models.News, models.News.id ==models.Has_Category.value)

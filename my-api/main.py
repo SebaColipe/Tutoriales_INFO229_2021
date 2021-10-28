@@ -20,6 +20,12 @@ def get_db():
         db.close()
 
 
+# GET /v1/news?from=2021-01-01&to=2021-01-31&category=sport
+@app.get("/v1/news", response_model=List[schemas.News])
+def read_news_from_date(From: str, to: str, category: str,db:Session =Depends(get_db)):
+    return crud.get_news_from_date(db, From=From , to=to, category=category)
+
+
 @app.post("/news/", response_model=schemas.News)
 def create_news(news: schemas.NewsCreate, db: Session = Depends(get_db)):
     db_user = crud.get_news_by_date(db, date=news.date)
@@ -52,7 +58,4 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_has_category(db, skip=skip, limit=limit)
     return items
 
-# GET /v1/news?from=2021-01-01&to=2021-01-31&category=sport
-@app.get("v1/news")
-def read_news_from_date(From: str = "2021-01-01", to: str = "2021-01-31", category: str = "sport",db: Session = Depends(get_db)):
-    return crud.get_news_from_date(db, From = From, to = to, category = category)
+
