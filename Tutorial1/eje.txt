@@ -1,0 +1,2 @@
+insert into news (id,title,date,url,media_outlet,category) values (1,"Festival Hecho en Casa | ¿Cuándo y dónde se podrá ver al pato de hule gigante?","2021-01-01","https://redgol.cl/tendencias/-Festival-Hecho-en-Casa-2021--Conoce-aqui-donde-estare-el-pato-de-hule--Parque-de-la-Familia--Hecho-en-Casa-20211026-0029.html","redgol","interes");
+insert into news (id,title,date,url,media_outlet,category) values (2,"Lo mas sport", "2021-01-01","www.muysport.cl","sportChile","sport");
