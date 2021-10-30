@@ -1,6 +1,25 @@
-version: '3.1'
+version: '3.4'  
 services:  
+  mariadb:
+    image: mariadb:10.3
+    container_name: contenedor_bd
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_DATABASE=tutorial1
+      - MYSQL_USER=my-api
+      - MYSQL_PASSWORD=my-api-password
+    volumes:
+      - ${PWD}/mariadb:/var/lib/mysql
   app:
     build:
       context: ./app
-    
+    container_name: contenedor_app
+    depends_on:
+      - mariadb
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  data:
