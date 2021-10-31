@@ -13,6 +13,7 @@ COPY ./models.py /my-api/models.py
 COPY ./schemas.py /my-api/schemas.py
 COPY ./database.py /my-api/database.py
 
-
+EXPOSE 8080:3306
+EXPOSE 3001:5000
 
 CMD [ "uvicorn","my-api.app:app --reload" ]
