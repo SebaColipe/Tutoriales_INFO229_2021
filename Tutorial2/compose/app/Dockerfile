@@ -1,19 +1,15 @@
-FROM python:3.6
+FROM python:3.8.10
 
-RUN pip install --upgrade pip
+COPY ./my-api /app
 
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+ENV BIND_PORT 5000  
+
+WORKDIR /app
 
 
-COPY ./__init__.py /my-api/__init__.py
-COPY ./crud.py /my-api/crud.py
-COPY ./app.py /my-api/app.py
-COPY ./models.py /my-api/models.py
-COPY ./schemas.py /my-api/schemas.py
-COPY ./database.py /my-api/database.py
+RUN pip install typing pydantic uvicorn fastapi sqlalchemy mysql-connector-python
 
-EXPOSE 8080:3306
-EXPOSE 3001:5000
 
-CMD [ "uvicorn","my-api.app:app --reload" ]
+EXPOSE $BIND_PORT
+
+CMD [ "uvicorn","my-api.main:app","--host=0.0.0.0", "--reload" ]
