@@ -1,0 +1,11 @@
+Implementar una arquitectura de software basada en RabbitMQ con los componentes siguientes:
+
+- un componente 'productor' envia mensajes de tipo: "wikipedia (Chile)"
+- un componente 'consumidor' realiza búsqueda en wikipedia e imprime el resumen de la pagina.
+- otro componente 'consumidor' devuelve el número de visitas en la pagina.
+
+Nota Bene:
+
+- API Wikipedia para Python:
+datos: [https://pypi.org/project/wikipedia/](https://pypi.org/project/wikipedia/)
+número de vistas de las páginas [https://pypi.org/project/pageviewapi/](https://pypi.org/project/pageviewapi/)
