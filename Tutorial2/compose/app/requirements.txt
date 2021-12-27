@@ -1,6 +1,0 @@
-typing
-pydantic
-uvicorn
-fastapi
-sqlalchemy
-mysql-connector-python
