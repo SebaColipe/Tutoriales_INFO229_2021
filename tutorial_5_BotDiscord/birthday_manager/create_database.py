@@ -23,7 +23,7 @@ def create_database(db_connection,db_name,cursor):
 def insert_data(cursor):
     print("insert")
     cursor.execute('''INSERT INTO birthday (member,date) VALUES
-    ('MatthieuVernier','1985-02-13');
+    ('MatthieuVernier','1985-02-13'),('SebastianQuintana', '1999-11-15'),('JuanQuintana','1966-07-08'),('AdelinaColipe','1972-08-28'),('AlessanderQuintana','2010-03-16'),('CatalinaQuintana','2012-03-29'),('CatalinaSM','1999-09-03'),('test1','2000-01-01'),('test2','2000-01-02') ;
     ''')
     cursor.execute("COMMIT;") 
 
@@ -62,3 +62,4 @@ def main():
 		create_database(db_connection,DATABASE,cursor)
 		insert_data(cursor)
 		print(f"Succesfully created: {DATABASE}")
+

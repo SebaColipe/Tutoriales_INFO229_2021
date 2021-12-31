@@ -8,7 +8,8 @@ import pika
 
 
 ############ CONEXION RABBITMQ ##############
-id_channel = 926127428630347811
+#id_channel = 926127428630347811 PRUEBADISCORD servidor propio
+
 
 
 HOST = os.environ['RABBITMQ_HOST']
@@ -49,8 +50,8 @@ async def on_ready():
         print(channel)
         print(channel.id)
 
-    channel = bot.get_channel(id_channel)
-    #channel = bot.get_channel(913706828502814760)
+#    channel = bot.get_channel(id_channel)
+    channel = bot.get_channel(913706828502814760)
     await channel.send('¡Hola!')
 
 
@@ -78,7 +79,7 @@ async def cumpleaños(ctx):
     print("send a new mesage to rabbitmq: "+message)
     channelMQ.basic_publish(exchange='cartero', routing_key="birthday", body=message)
 
-@bot.command(name='busca', help='Busca en YouTube y abre la primera sugerencia de la pagina')
+@bot.command(name='busca', help='Busca en YouTube y abre la primera sugerencia de la pagina. Ejemplo: !busca El increible mundo de Gumball')
 async def busca(ctx):
     message = ctx.message.content
     print("send a new mesage to rabbitmq: "+message)
@@ -113,8 +114,8 @@ def writer(bot):
     print(' [*] Waiting for messages. To exit press CTRL+C')
 
     async def write(message):
-        #channel = bot.get_channel(908505071887732768)#913706828502814760
-        channel = bot.get_channel(id_channel)#913706828502814760
+        channel = bot.get_channel(908505071887732768)#913706828502814760
+        #channel = bot.get_channel(id_channel)#913706828502814760
         
         await channel.send(message)
 
