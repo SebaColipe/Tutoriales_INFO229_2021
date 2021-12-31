@@ -8,6 +8,8 @@ import pika
 
 
 ############ CONEXION RABBITMQ ##############
+id_channel = 926127428630347811
+
 
 HOST = os.environ['RABBITMQ_HOST']
 print("rabbit:"+HOST)
@@ -47,7 +49,8 @@ async def on_ready():
         print(channel)
         print(channel.id)
 
-    channel = bot.get_channel(913706828502814760)
+    channel = bot.get_channel(id_channel)
+    #channel = bot.get_channel(913706828502814760)
     await channel.send('¡Hola!')
 
 
@@ -69,12 +72,18 @@ async def cumpleaños(ctx):
 
     channelMQ.basic_publish(exchange='cartero', routing_key="birthday", body=message)
 
-@bot.command(name='add-birthday', help='Permite añadir el cumpleaño de un nuevo miembro de la GUILD que se pasa en parámetro. Ejemplo: !birthday MatthieuVernier 1985-02-13')
+@bot.command(name='add-birthday', help='Permite añadir el cumpleaño de un nuevo miembro de la GUILD que se pasa en parámetro. Ejemplo: !add-birthday MatthieuVernier 1985-02-13')
 async def cumpleaños(ctx):
     message =  ctx.message.content
     print("send a new mesage to rabbitmq: "+message)
     channelMQ.basic_publish(exchange='cartero', routing_key="birthday", body=message)
 
+@bot.command(name='busca', help='Busca en YouTube y abre la primera sugerencia de la pagina')
+async def busca(ctx):
+    message = ctx.message.content
+    print("send a new mesage to rabbitmq: "+message)
+    channelMQ.basic_publish(exchange='cartero', routing_key="birthday", body=message)
+    
 ############ CONSUMER ###############
 
 import threading
@@ -104,7 +113,9 @@ def writer(bot):
     print(' [*] Waiting for messages. To exit press CTRL+C')
 
     async def write(message):
-        channel = bot.get_channel(908505071887732768)#913706828502814760
+        #channel = bot.get_channel(908505071887732768)#913706828502814760
+        channel = bot.get_channel(id_channel)#913706828502814760
+        
         await channel.send(message)
 
     def callback(ch, method, properties, body):

@@ -18,6 +18,8 @@ def create_database(db_connection,db_name,cursor):
 
 	cursor.execute("COMMIT;") 
 
+#('SebastianQuintana', '1999-11-15'),('JuanQuintana','1966-07-08'),('AdelinaColipe','1972-08-28'),('AlessanderQuintana','2010-03-16'),('CatalinaQuintana','2012-03-29'),('CatalinaSM','1999-09-03'),('test1','2000-01-01'),('test2','2000-01-02') 
+
 def insert_data(cursor):
     print("insert")
     cursor.execute('''INSERT INTO birthday (member,date) VALUES
