@@ -2,6 +2,10 @@ import mysql.connector
 import os, time
 import pika
 import create_database
+#import pywhatkit as rep 
+import webbrowser
+import re
+from urllib import parse, request
 
 
 print("start birthday manager...")
@@ -65,7 +69,7 @@ def callback(ch, method, properties, body):
 			print("send a new message to rabbitmq: "+result)
 			channel.basic_publish(exchange='cartero',routing_key="discord_writer",body=result)
 
-	if (arguments[0]=="!add-birthday"):
+	elif (arguments[0]=="!add-birthday"):
 
 		person = arguments[1]
 		print(person)
@@ -76,6 +80,20 @@ def callback(ch, method, properties, body):
 		cursor.execute(f'''INSERT INTO birthday(member,date) VALUES("{person}","{birthday}");''')
 		cursor.execute(f'''COMMIT;''')
 
+
+	elif (arguments[0]=="!busca"):
+		search = " ".join(arguments[1:])
+		
+		#url_busqueda = "https://www.youtube.com/results?search_query="+busqueda.replace(" ","+")
+		
+		query_string = parse.urlencode({'search_query':search})
+		html_content = request.urlopen('http://www.youtube.com/results?'+query_string)
+		search_results=re.findall('watch\?v=(.{11})',html_content.read().decode('utf-8'))
+		url_video = "https://www.youtube.com/watch?v="+search_results[0]
+		channel.basic_publish(exchange='cartero',routing_key="discord_writer",body=url_video)
+
+#sudo kill `sudo lsof -t -i:5672`
+		
 
 channel.basic_consume(
     queue=queue_name, on_message_callback=callback, auto_ack=True)
